@@ -14,12 +14,16 @@ class Dashboard extends CI_Controller {
     public function index()
     {
        
-        $data['seluruh_peserta'] = $this->dashboard_model->hit_seluruh_peserta();
+        if($this->session->userdata('status') == 0 ){
+            $this->load->view('./login');
+        } else {
+            $data['seluruh_peserta'] = $this->dashboard_model->hit_seluruh_peserta();
         $data['peserta_hadir'] = $this->dashboard_model->hitung_hadir();
         $data['peserta_ots'] = $this->dashboard_model->hit_peserta_ots();
         $data['peserta_belum_hadir'] = $this->dashboard_model->hit_belum_hadir();
 
         $this->load->view('admin/index', $data);
+        }
     }   
 }
 
