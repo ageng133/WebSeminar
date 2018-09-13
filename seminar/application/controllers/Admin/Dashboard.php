@@ -13,16 +13,17 @@ class Dashboard extends CI_Controller {
 
     public function index()
     {
+        $this->load->library('session');
        
         if($this->session->userdata('status') == 0 ){
-            $this->load->view('./login');
+            // $data['seluruh_peserta'] = $this->dashboard_model->hit_seluruh_peserta();
+            // $data['peserta_hadir'] = $this->dashboard_model->hitung_hadir();
+            // $data['peserta_ots'] = $this->dashboard_model->hit_peserta_ots();
+            // $data['peserta_belum_hadir'] = $this->dashboard_model->hit_belum_hadir();
+            // , $data
+            $this->load->view('admin/kehadiran');
         } else {
-            $data['seluruh_peserta'] = $this->dashboard_model->hit_seluruh_peserta();
-        $data['peserta_hadir'] = $this->dashboard_model->hitung_hadir();
-        $data['peserta_ots'] = $this->dashboard_model->hit_peserta_ots();
-        $data['peserta_belum_hadir'] = $this->dashboard_model->hit_belum_hadir();
-
-        $this->load->view('admin/index', $data);
+           
         }
     }   
 }

@@ -14,9 +14,11 @@ class Login extends CI_Controller {
 
     public function index()
     {
+        $this->load->library('session');
         $this->load->view('login_view');
     }
     function aksi_login(){
+        $this->load->library('session');
         $username = htmlspecialchars($this->input->post('username'));
         $password = htmlspecialchars($this->input->post('password'));
         $where = array(
@@ -24,13 +26,15 @@ class Login extends CI_Controller {
             'password' => md5($password),
         );
         $cek = $this->user->login($where);
-        if($cek){
+        if($cek > 0){
             $data = array(
                 'nama' => $username,
                 'status' => 1
             );
-        $this->session->set_userdata($data);
-        redirect(base_url('admin/dashboard'));
+        $this->session->set_userdata('admin', $data);
+        redirect('dashboard');
+        } else {
+            redirect('login');
         }
     }
 

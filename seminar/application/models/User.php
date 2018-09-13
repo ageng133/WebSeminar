@@ -9,7 +9,7 @@ class User extends CI_Model {
     public function login($where)
     {
        $cek = $this->db->get_where('fest_user', $where);
-        return $cek->num_rows();
+        return $cek->row_array();
     }
 
 }
